@@ -61,5 +61,8 @@ SELECT animal_id, name, datetime from animal_ins order by name, datetime desc;
                       
 --  상위 n개 레코드 
 SELECT name from animal_ins where datetime = (select min(datetime) from animal_ins);
+
+-- 이름이 없는 동물의 아이디
+SELECT animal_id from animal_ins where name is Null order by animal_id;                      
                     
                       
