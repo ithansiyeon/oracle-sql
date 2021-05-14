@@ -33,6 +33,9 @@ SELECT NAME ,count(*) as COUNT from animal_ins group by name having name is not 
 
 -- 최솟값 구하기
 SELECT min(datetime) as 시간 from animal_ins;
+                      
+-- 어린 동물 찾기
+SELECT ANIMAL_ID, NAME FROM ANIMAL_INS WHERE INTAKE_CONDITION != 'Aged';                      
 
 -- 중성화 여부 파악하기
 SELECT animal_id, name, (case when (SEX_UPON_INTAKE like '%Neutered%' or SEX_UPON_INTAKE like '%Spayed%') then 'O' else 'X' end) as SEX_UPON_INTAKE from ANIMAL_INS order by animal_id;
