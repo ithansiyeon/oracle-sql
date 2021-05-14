@@ -46,3 +46,7 @@ FROM(
 GROUP BY HOUR
 HAVING HOUR>=9 AND HOUR<20
 ORDER BY HOUR ASC;
+
+-- 역순 정렬하기
+SELECT name, datetime from animal_ins order by animal_id desc;                      
+                      
