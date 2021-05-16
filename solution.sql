@@ -65,4 +65,10 @@ SELECT name from animal_ins where datetime = (select min(datetime) from animal_i
 -- 이름이 없는 동물의 아이디
 SELECT animal_id from animal_ins where name is Null order by animal_id;                      
                     
+--  없어진 기록 찾기
+SELECT ANIMAL_ID, NAME FROM ANIMAL_OUTS
+MINUS
+SELECT ANIMAL_ID, NAME FROM ANIMAL_INS;   
                       
+--  있었는데요 없었습니다                      
+SELECT a.animal_id, a.name from animal_ins a join animal_outs b on a.animal_id = b.animal_id where a.datetime > b.datetime order by a.datetime;                      
