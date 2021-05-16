@@ -33,6 +33,9 @@ SELECT NAME ,count(*) as COUNT from animal_ins group by name having name is not 
 
 -- 최솟값 구하기
 SELECT min(datetime) as 시간 from animal_ins;
+
+--  오랜 기간 보호한 동물(1)
+SELECT * from (select name,datetime from animal_ins where animal_id not in (select animal_id from animal_outs)order by datetime asc) where rownum <=3 ;                      
                       
 -- 어린 동물 찾기
 SELECT ANIMAL_ID, NAME FROM ANIMAL_INS WHERE INTAKE_CONDITION != 'Aged';                      
