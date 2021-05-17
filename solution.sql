@@ -77,4 +77,7 @@ SELECT ANIMAL_ID, NAME FROM ANIMAL_INS;
 SELECT a.animal_id, a.name from animal_ins a join animal_outs b on a.animal_id = b.animal_id where a.datetime > b.datetime order by a.datetime;             
 
 --  오랜 기간 보호한 동물(1)
-SELECT * from (select name,datetime from animal_ins where animal_id not in (select animal_id from animal_outs)order by datetime asc) where rownum <=3;                      
+SELECT * from (select name,datetime from animal_ins where animal_id not in (select animal_id from animal_outs)order by datetime asc) where rownum <=3;     
+
+-- 오랜 기간 보호한 동물(2)
+select * from (SELECT a.animal_id, a.name from animal_ins a join animal_outs o on a.animal_id = o.animal_id order by (o.datetime-a.datetime) desc) where rownum <= 2;                      
