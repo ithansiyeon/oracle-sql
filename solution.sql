@@ -33,6 +33,9 @@ SELECT NAME ,count(*) as COUNT from animal_ins group by name having name is not 
 
 -- 최솟값 구하기
 SELECT min(datetime) as 시간 from animal_ins;
+                      
+-- 우유와 요거트가 담긴 장바구니
+select cart_id from (select cart_id, count(*) as cnt from (select distinct cart_id, name from cart_products where name = 'Milk' or name = 'Yogurt') group by cart_id) where cnt>=2 order by cart_id;                      
 
 --  오랜 기간 보호한 동물(1)
 SELECT * from (select name,datetime from animal_ins where animal_id not in (select animal_id from animal_outs)order by datetime asc) where rownum <=3 ;                      
