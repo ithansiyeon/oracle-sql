@@ -80,4 +80,7 @@ SELECT a.animal_id, a.name from animal_ins a join animal_outs b on a.animal_id =
 SELECT * from (select name,datetime from animal_ins where animal_id not in (select animal_id from animal_outs)order by datetime asc) where rownum <=3;     
 
 -- 오랜 기간 보호한 동물(2)
-select * from (SELECT a.animal_id, a.name from animal_ins a join animal_outs o on a.animal_id = o.animal_id order by (o.datetime-a.datetime) desc) where rownum <= 2;                      
+select * from (SELECT a.animal_id, a.name from animal_ins a join animal_outs o on a.animal_id = o.animal_id order by (o.datetime-a.datetime) desc) where rownum <= 2;    
+                      
+-- 헤비 유저가 소유한 장소
+select a.id, a.name, a.host_id from places a join (SELECT host_id, count(*) as cnt from places group by host_id) b on a.host_id = b.host_id where b.cnt >= 2 order by a.id;                      
