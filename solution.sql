@@ -87,3 +87,6 @@ select * from (SELECT a.animal_id, a.name from animal_ins a join animal_outs o o
                       
 -- 헤비 유저가 소유한 장소
 select a.id, a.name, a.host_id from places a join (SELECT host_id, count(*) as cnt from places group by host_id) b on a.host_id = b.host_id where b.cnt >= 2 order by a.id;                      
+
+-- 우유와 요거트가 담긴 장바구니
+select cart_id from (select cart_id, count(*) as cnt from (select distinct cart_id, name from cart_products where name = 'Milk' or name = 'Yogurt') group by cart_id) where cnt>=2 order by cart_id;                      
