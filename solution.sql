@@ -93,3 +93,6 @@ select cart_id from (select cart_id, count(*) as cnt from (select distinct cart_
                       
 -- 보호소에서 중성화한 동물
 SELECT a.animal_id, a.animal_type, a.name from ((select * from animal_ins where SEX_UPON_INTAKE not like 'Spayed%' and SEX_UPON_INTAKE not like 'Neutered%') a join (select * from animal_outs where SEX_UPON_OUTCOME like 'Neutered%' or SEX_UPON_OUTCOME like 'Spayed%') b on a.animal_id = b.animal_id) order by a.animal_id;                      
+
+-- 입양 시각 구하기(2)
+select b.no, nvl(count,0) as count from (SELECT to_number(to_char(datetime,'HH24')) as hour ,count(*) as count from animal_outs group by to_number(to_char(datetime,'HH24'))) a, (select level-1 as no from dual connect by level <=24) b where a.hour(+) = b.no order by b.no;
