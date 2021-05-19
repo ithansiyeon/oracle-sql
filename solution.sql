@@ -90,3 +90,6 @@ select a.id, a.name, a.host_id from places a join (SELECT host_id, count(*) as c
 
 -- 우유와 요거트가 담긴 장바구니
 select cart_id from (select cart_id, count(*) as cnt from (select distinct cart_id, name from cart_products where name = 'Milk' or name = 'Yogurt') group by cart_id) where cnt>=2 order by cart_id;                      
+                      
+-- 보호소에서 중성화한 동물
+SELECT a.animal_id, a.animal_type, a.name from ((select * from animal_ins where SEX_UPON_INTAKE not like 'Spayed%' and SEX_UPON_INTAKE not like 'Neutered%') a join (select * from animal_outs where SEX_UPON_OUTCOME like 'Neutered%' or SEX_UPON_OUTCOME like 'Spayed%') b on a.animal_id = b.animal_id) order by a.animal_id;                      
