@@ -69,7 +69,10 @@ SELECT animal_id, name, datetime from animal_ins order by name, datetime desc;
 SELECT name from animal_ins where datetime = (select min(datetime) from animal_ins);
 
 -- 이름이 없는 동물의 아이디
-SELECT animal_id from animal_ins where name is Null order by animal_id;                      
+SELECT animal_id from animal_ins where name is Null order by animal_id;       
+
+-- 이름이 있는 동물의 아이디
+SELECT animal_id from animal_ins where name is not null order by animal_id;
                     
 --  없어진 기록 찾기
 SELECT ANIMAL_ID, NAME FROM ANIMAL_OUTS
